@@ -9,16 +9,59 @@ class CartItem extends React.Component {
       qty: 1,
       img: ''
     }
+    // this.increaseQuantity = this.increaseQuantity.bind(this);
+    // this.testing();
   }
+
+  // testing () {
+  //   const promise = new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve('done');
+  //     }, 5000);
+  //   })
+
+  //   promise.then(() => {
+  //     // setState acts like a synchronus call
+  //     this.setState({ qty: this.state.qty + 10 });
+
+  //     this.setState({ qty: this.state.qty + 10 });
+
+  //     this.setState({ qty: this.state.qty + 10 });
+
+  //     console.log('state', this.state);
+  //   });
+  // }
   increaseQuantity = () => {
+    // this.state.qty += 1;
     // console.log('this', this.state);
+    // setState form 1
+    // this.setState({
+    //   qty: this.state.qty + 1
+    // }, () => {});
+
+    // setState form 2 - if prevState required use this
     this.setState((prevState) => {
       return {
         qty: prevState.qty + 1
       }
-    }); 
+    });
+  }
+
+  decreaseQuantity = () => {
+    const { qty } = this.state;
+
+    if (qty === 0) {
+      return;
+    }
+    // setState form 2 - if prevState required use this
+    this.setState((prevState) => {
+      return {
+        qty: prevState.qty - 1
+      }
+    });
   }
   render () {
+    console.log('render');
     const { price, title, qty } = this.state;
     return (
       <div className="cart-item">
@@ -31,9 +74,23 @@ class CartItem extends React.Component {
           <div style={ { color: '#777' } }>Qty: {qty} </div>
           <div className="cart-item-actions">
             {/* Buttons */}
-            <img alt="increase" className="action-icons" src="https://as2.ftcdn.net/v2/jpg/01/26/10/59/1000_F_126105961_6vHCTRX2cPOnQTBvx9OSAwRUapYTEmYA.jpg" onClick={this.increaseQuantity}/>
-            <img alt="decrease" className="action-icons" src="https://as1.ftcdn.net/v2/jpg/03/73/49/86/1000_F_373498649_nBxauQ0ipBSVrVcMpWWVmTpXu3BLvRyY.jpg" />
-            <img alt="delete" className="action-icons" src="https://cdn-icons.flaticon.com/png/512/3405/premium/3405244.png?token=exp=1659983906~hmac=bbca7ab5dc8b1dad86ce3ae1a5f11d92" />
+            <img
+              alt="increase"
+              className="action-icons"
+              src="https://image.flaticon.com/icons/svg/992/992651.svg"
+              onClick={this.increaseQuantity}
+            />
+            <img
+              alt="decrease"
+              className="action-icons"
+              src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
+              onClick={this.decreaseQuantity}
+            />
+            <img
+              alt="delete"
+              className="action-icons"
+              src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
+            />
           </div>
         </div>
       </div>
